@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37328.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forecaster.API", "Forecaster.API\Forecaster.API.csproj", "{58BD6EDF-4345-4FD4-AEB0-4B505E8AFD75}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58BD6EDF-4345-4FD4-AEB0-4B505E8AFD75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58BD6EDF-4345-4FD4-AEB0-4B505E8AFD75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58BD6EDF-4345-4FD4-AEB0-4B505E8AFD75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58BD6EDF-4345-4FD4-AEB0-4B505E8AFD75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F7007833-975D-4EFC-A5E0-072705566DDB}
+	EndGlobalSection
+EndGlobal
