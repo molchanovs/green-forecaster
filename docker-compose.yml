@@ -30,3 +30,32 @@
       postgres:
         condition: service_healthy
 
+  # ── Smoke tests ───────────────────────────────────────────────────────────
+  # Runs the Forecaster.SmokeTests project against a live API on a loop.
+  #
+  # The API can be hosted anywhere — locally outside Docker, or in production.
+  # FORECASTER_BASE_URL is read from the host environment (set by seed-env-vars.ps1).
+  #
+  # Activate with the "smoke" profile:
+  #   docker compose --profile smoke up smoke-tests
+  #
+  # Run once (e.g. in CI):
+  #   docker compose --profile smoke run --rm -e PROBE_INTERVAL_SECONDS=0 smoke-tests
+  smoke-tests:
+    build:
+      context: .
+      dockerfile: Forecaster.SmokeTests/Dockerfile
+    container_name: forecaster-smoke-tests
+    profiles:
+      - smoke
+    # Allows the container to reach the host machine via host.docker.internal.
+    # Required on Linux; harmless on Docker Desktop (Windows / Mac).
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      # When running inside Docker, localhost refers to the container — not the host.
+      # Use host.docker.internal to reach the API running on the host machine.
+      # Override FORECASTER_DOCKER_BASE_URL to target a different environment (e.g. production).
+      FORECASTER_BASE_URL: ${FORECASTER_BASE_URL}
+      PROBE_INTERVAL_SECONDS: ${PROBE_INTERVAL_SECONDS:-60}
+

@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forecaster.DataContracts", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forecaster.IntegrationTests", "Forecaster.IntegrationTests\Forecaster.IntegrationTests.csproj", "{24F2D4E5-D0FB-4749-9440-0B88E15D1196}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forecaster.SmokeTests", "Forecaster.SmokeTests\Forecaster.SmokeTests.csproj", "{63E204F7-2766-48AF-9DE8-891132F66AA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,18 @@ Global
 		{24F2D4E5-D0FB-4749-9440-0B88E15D1196}.Release|x64.Build.0 = Release|Any CPU
 		{24F2D4E5-D0FB-4749-9440-0B88E15D1196}.Release|x86.ActiveCfg = Release|Any CPU
 		{24F2D4E5-D0FB-4749-9440-0B88E15D1196}.Release|x86.Build.0 = Release|Any CPU
+		{63E204F7-2766-48AF-9DE8-891132F66AA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63E204F7-2766-48AF-9DE8-891132F66AA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63E204F7-2766-48AF-9DE8-891132F66AA2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{63E204F7-2766-48AF-9DE8-891132F66AA2}.Debug|x64.Build.0 = Debug|Any CPU
+		{63E204F7-2766-48AF-9DE8-891132F66AA2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{63E204F7-2766-48AF-9DE8-891132F66AA2}.Debug|x86.Build.0 = Debug|Any CPU
+		{63E204F7-2766-48AF-9DE8-891132F66AA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63E204F7-2766-48AF-9DE8-891132F66AA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63E204F7-2766-48AF-9DE8-891132F66AA2}.Release|x64.ActiveCfg = Release|Any CPU
+		{63E204F7-2766-48AF-9DE8-891132F66AA2}.Release|x64.Build.0 = Release|Any CPU
+		{63E204F7-2766-48AF-9DE8-891132F66AA2}.Release|x86.ActiveCfg = Release|Any CPU
+		{63E204F7-2766-48AF-9DE8-891132F66AA2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -151,10 +151,7 @@ Run from the solution root. The bundle targets the host OS by default; use `--se
 
 ```powershell
 # Self-contained (no .NET runtime required on the target machine)
-dotnet ef migrations bundle `
-  --project Forecaster.Database `
-  --output efbundle.exe `
-  --self-contained
+dotnet ef migrations bundle --project Forecaster.Database --output efbundle.exe --self-contained
 ```
 
 ---
