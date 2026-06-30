@@ -1,0 +1,72 @@
+﻿name: Integration Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_call:
+    secrets:
+      POSTGRES_DB:
+        required: true
+      POSTGRES_USER:
+        required: true
+      POSTGRES_PASSWORD:
+        required: true
+
+jobs:
+  integration-tests:
+    name: Run Integration Tests
+    runs-on: ubuntu-latest
+
+    env:
+      POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      ConnectionStrings__DefaultConnection: >-
+        Host=localhost;Port=5432;
+        Database=${{ secrets.POSTGRES_DB }};
+        Username=${{ secrets.POSTGRES_USER }};
+        Password=${{ secrets.POSTGRES_PASSWORD }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Start PostgreSQL
+        run: docker compose up -d postgres
+
+      - name: Wait for PostgreSQL to be healthy
+        run: |
+          echo "Waiting for Postgres to be ready..."
+          for i in $(seq 1 30); do
+            STATUS=$(docker inspect --format='{{.State.Health.Status}}' forecaster-postgres 2>/dev/null || echo "not_found")
+            echo "  attempt $i: $STATUS"
+            if [ "$STATUS" = "healthy" ]; then
+              echo "Postgres is healthy."
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Postgres did not become healthy in time."
+          docker compose logs postgres
+          exit 1
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Run integration tests
+        run: dotnet test Forecaster.IntegrationTests/Forecaster.IntegrationTests.csproj --configuration Release --logger "trx;LogFileName=integration-tests.trx"
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-test-results
+          path: '**/TestResults/integration-tests.trx'
+
+      - name: Tear down PostgreSQL
+        if: always()
+        run: docker compose down
+

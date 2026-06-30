@@ -10,9 +10,22 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  component-tests:
+    name: Component Tests
+    uses: ./.github/workflows/component-tests.yml
+
+  integration-tests:
+    name: Integration Tests
+    uses: ./.github/workflows/integration-tests.yml
+    secrets:
+      POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+
   build-and-push:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
+    needs: [component-tests, integration-tests]
     permissions:
       contents: read
       packages: write

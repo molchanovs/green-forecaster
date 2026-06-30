@@ -1,0 +1,28 @@
+﻿name: Component Tests
+
+on:
+  workflow_call:
+
+jobs:
+  component-tests:
+    name: Run Component Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Run component tests
+        run: dotnet test Forecaster.ComponentTests/Forecaster.ComponentTests.csproj --configuration Release --logger "trx;LogFileName=component-tests.trx"
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: component-test-results
+          path: '**/TestResults/component-tests.trx'
