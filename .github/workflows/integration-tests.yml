@@ -1,9 +1,6 @@
 ﻿name: Integration Tests
 
 on:
-  pull_request:
-    branches:
-      - main
   workflow_call:
     secrets:
       POSTGRES_DB:
